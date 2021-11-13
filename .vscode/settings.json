@@ -1,0 +1,10 @@
+{
+	"python.autoComplete.extraPaths":	[
+		"/Users/ankushgirotra/Library/Python/2.7/lib/python/site-packages/bin"
+	],
+	"python.analysis.extraPaths":	[
+		"/Users/ankushgirotra/Library/Python/2.7/lib/python/site-packages",
+	],
+	"python.pythonPath": 
+		"/Users/ankushgirotra/Library/Python/2.7/lib/python",
+}
