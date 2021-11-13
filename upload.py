@@ -40,7 +40,7 @@ FIRMWARE:       %s
     print("Done.")
 
 def reset(port, baudrate):
-    os.system('stty -F ' + port + ' speed ' + str(baudrate) + ' -echo > /dev/null')
+    os.system('stty -f ' + port + ' speed ' + str(baudrate) + ' -echo > /dev/null')
     print("Device tty configured.")
     os.system('echo M997 >> ' + port)
     print("M997 RESET sent.")
