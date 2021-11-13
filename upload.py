@@ -1,3 +1,4 @@
+#!/usr/bin/env python2
 import sys
 import os
 import binproto2 as mbp
@@ -27,5 +28,5 @@ def upload(port, baudrate, firmware_path):
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
-        sys.exit("USAGE: python %s [DEV_PORT] [BAUDRATE] [FIRMWARE_PATH]\n");
+        sys.exit("USAGE: python %s [DEV_PORT] [BAUDRATE] [FIRMWARE_PATH]"%sys.argv[0]);
     upload(sys.argv[1], sys.argv[2], sys.argv[3])
