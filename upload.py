@@ -19,16 +19,11 @@ BUADRATE:       %s
 FIRMWARE:       %s
 """%(port, baudrate, firmware_path))
     
-    protocol = mbp.Protocol(port, baudrate, k_blocksize, k_timeout_ms)
-    # INIT SD CARD
-    protocol.send_ascii("M21") 
+    print("""Preparing transfer session...""")
+    protocol = mbp.Protocol(port, baudrate, k_blocksize, k_timeout_ms) 
 
-    # DELETE OLD .BIN FILE
-    #print("""Removing existing '%s'..."""%k_target_fname)
-    #protocol.send_ascii("M30 "+k_target_fname)
-    # STOP AUTO TEMP REPORTING
-    protocol.send_ascii("M155 S0")
-    print("""Done. Preparing transfer session...""")
+    protocol.send_ascii("M21")          # INIT SD CARD
+    protocol.send_ascii("M155 S0")      # STOP AUTO TEMP REPORTING
 
     protocol.connect()
     print("MBTP Connect")
