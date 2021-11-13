@@ -9,6 +9,8 @@ def upload(port, baudrate, firmware_path):
     k_blocksize=512
     k_timeout_ms=1000
     k_target_fname="firmware.bin"
+    k_reconnect_poll_interval_s=0.2
+    k_reconnect_timeout_s=20
     print(1+"""
 SKR UPLOADER
 ============
@@ -39,7 +41,7 @@ FIRMWARE:       %s
     protocol.shutdown()
     print("Session successfully shut down.")
     reset(port, baudrate)
-    wait_for_reconnect(port, baudrate)
+    wait_for_reconnect(port, k_reconnect_timeout_s, k_reconnect_poll_interval_s)
     print("Done.")
 
 def reset(port, baudrate):
@@ -49,16 +51,25 @@ def reset(port, baudrate):
     print("M997 RESET sent.")
 
 
-def wait_for_reconnect(port, baudrate):
-    print("Issuing M997 Reset...")
+def wait_for_reconnect(port, timeout, poll_interval):
+    print("Waiting for recconnect...")
     check_command = 'ls ' + port + ' > /dev/null 2>&1'
-    while(True):
-        time.sleep(1);
-        print(os.system(check_command))
+    waiting=True
+    time_spent=0
+    while(waiting and time_spent < timeout):
+        time.sleep(poll_interval);
+        time_spent+=poll_interval;
+        if os.system(check_command) == 0:
+            waiting=False
+    if waiting:
+        sys.exit("ERROR: Wait for reset timeout after %s seconds."%timeout)
+    else:
+        print("Successfully reconnected on port %s after %s seconds."%(poll_interval, time_spent))
+
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         sys.exit("USAGE: python %s [DEV_PORT] [BAUDRATE] [FIRMWARE_PATH]"%sys.argv[0]);
-    #upload(sys.argv[1], sys.argv[2], sys.argv[3])
+    upload(sys.argv[1], sys.argv[2], sys.argv[3])
     wait_for_reconnect(sys.argv[1], sys.argv[2])
