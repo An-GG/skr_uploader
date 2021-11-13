@@ -72,4 +72,3 @@ if __name__ == "__main__":
     if len(sys.argv) < 4:
         sys.exit("USAGE: python %s [DEV_PORT] [BAUDRATE] [FIRMWARE_PATH]"%sys.argv[0]);
     upload(sys.argv[1], sys.argv[2], sys.argv[3])
-    wait_for_reconnect(sys.argv[1], sys.argv[2])
