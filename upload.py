@@ -11,7 +11,7 @@ def upload(port, baudrate, firmware_path):
     k_target_fname="firmware.bin"
     k_reconnect_poll_interval_s=0.2
     k_reconnect_timeout_s=20
-    print(1+"""
+    print("""
 SKR UPLOADER
 ============
 DEV PORT:       %s
