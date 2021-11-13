@@ -24,8 +24,8 @@ FIRMWARE:       %s
     protocol.send_ascii("M21") 
 
     # DELETE OLD .BIN FILE
-    print("""Removing existing '%s'..."""%k_target_fname)
-    protocol.send_ascii("M30 "+k_target_fname)
+    #print("""Removing existing '%s'..."""%k_target_fname)
+    #protocol.send_ascii("M30 "+k_target_fname)
     # STOP AUTO TEMP REPORTING
     protocol.send_ascii("M155 S0")
     print("""Done. Preparing transfer session...""")
