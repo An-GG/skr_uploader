@@ -40,7 +40,7 @@ FIRMWARE:       %s
     print("Done.")
 
 def reset(port, baudrate):
-    if platform.system() == 'Darwin': // bsd fuckers...
+    if platform.system() == 'Darwin': # bsd fuckers...
         os.system('stty -f ' + port + ' speed ' + str(baudrate)  + ' -echo > /dev/null')
     else:
         os.system('stty -F ' + port + ' ospeed ' + str(baudrate) + ' ispeed ' + str(baudrate)  + ' -echo > /dev/null')
