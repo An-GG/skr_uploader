@@ -3,7 +3,7 @@ import sys
 import os
 import time
 import binproto2 as mbp
-
+import platform 
 
 def upload(port, baudrate, firmware_path):
     k_blocksize=512
@@ -40,7 +40,10 @@ FIRMWARE:       %s
     print("Done.")
 
 def reset(port, baudrate):
-    os.system('stty --file=' + port + ' speed ' + str(baudrate) + ' -echo > /dev/null')
+    if platform.system() == 'Darwin': // bsd fuckers...
+        os.system('stty -f ' + port + ' speed ' + str(baudrate)  + ' -echo > /dev/null')
+    else:
+        os.system('stty -F ' + port + ' ospeed ' + str(baudrate) + ' ispeed ' + str(baudrate)  + ' -echo > /dev/null')
     print("Device tty configured.")
     os.system('echo M997 >> ' + port)
     print("M997 RESET sent.")
