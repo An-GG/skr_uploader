@@ -72,7 +72,6 @@ def wait_for_reconnect(port, timeout, poll_interval):
 def send_post_upload_gcode(port, baudrate):
     configure_tty(port, baudrate)
     os.system("echo 'M502' >> " + port)
-    os.system("echo 'G29 A' >> " + port)
     os.system("echo 'G29 L1' >> " + port)
     os.system("echo 'M500' >> " + port)
     print("Sent post upload gcode.")
