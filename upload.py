@@ -37,8 +37,8 @@ FIRMWARE:       %s
     print("Session successfully shut down.")
     reset(port, baudrate)
     wait_for_reconnect(port, k_reconnect_timeout_s, k_reconnect_poll_interval_s)
-	time.sleep(0.5)
-	send_post_upload_gcode(port, baudrate)
+    time.sleep(0.5)
+    send_post_upload_gcode(port, baudrate)
     print("Done.")
 
 def configure_tty(port, baudrate):
@@ -49,7 +49,7 @@ def configure_tty(port, baudrate):
     print("Device tty configured.")
 
 def reset(port, baudrate):
-	configure_tty(port, baudrate)
+    configure_tty(port, baudrate)
     os.system('echo M997 >> ' + port)
     print("M997 RESET sent.")
 
@@ -70,12 +70,12 @@ def wait_for_reconnect(port, timeout, poll_interval):
         print("Successfully reconnected on port %s after %s seconds."%(poll_interval, time_spent))
 
 def send_post_upload_gcode(port, baudrate):
-	configure_tty(port, baudrate)
-	os.system("echo 'M502' >> " + port)
-	os.system("echo 'G29 A' >> " + port)
-	os.system("echo 'G29 L1' >> " + port)
-	os.system("echo 'M500' >> " + port)
-	print("Sent post upload gcode.")
+    configure_tty(port, baudrate)
+    os.system("echo 'M502' >> " + port)
+    os.system("echo 'G29 A' >> " + port)
+    os.system("echo 'G29 L1' >> " + port)
+    os.system("echo 'M500' >> " + port)
+    print("Sent post upload gcode.")
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
